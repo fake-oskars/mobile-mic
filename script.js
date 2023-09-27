@@ -8,7 +8,7 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
         const source = audioContext.createMediaStreamSource(stream);
         source.connect(analyser);
 
-        analyser.fftSize = 500; // Adjust this value for sensitivity
+        analyser.fftSize = 256; // Adjust this value for sensitivity
 
         const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
@@ -19,9 +19,11 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
             const averageVolume = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
 
             // Map the volume to all three color components (red, green, and blue)
-            const red = Math.floor(255 * (averageVolume / 10));
-            const green = Math.floor(255 * (averageVolume / 20));
-            const blue = Math.floor(255 * (averageVolume / 30));
+            const factor = 5; // Adjust this factor as needed
+            const red = Math.floor(255 * (averageVolume / 255) * factor);
+            const green = Math.floor(255 * (averageVolume / 255) * factor);
+            const blue = Math.floor(255 * (averageVolume / 255) * factor);
+            
 
             // Set the background color based on volume
             document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
