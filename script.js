@@ -36,23 +36,21 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
     console.error('Web Audio API is not supported in this browser.');
 }
 
-// Function to format time as HH:MM:SS.mmm
-function formatTime(date) {
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    const seconds = date.getSeconds().toString().padStart(2, '0');
-    const milliseconds = date.getMilliseconds().toString().padStart(3, '0');
-    return `${hours}:${minutes}:${seconds}.${milliseconds}`;
-}
 
-// Function to update the clock
+// Function to update the clock with the correct timezone
 function updateClock() {
-    const timezoneOffset = 2; // GMT+2 (Latvia)
-    const currentTime = new Date();
-    currentTime.setHours(currentTime.getHours() + timezoneOffset); // Adjust for timezone
-    document.getElementById('clock').textContent = formatTime(currentTime);
+    const options = {
+        timeZone: 'Europe/Riga', // Timezone for Latvia (GMT+2)
+        hour12: false, // Use 24-hour format
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        fractionalSecondDigits: 3, // Display milliseconds
+    };
+
+    const currentTime = new Date().toLocaleTimeString('en-US', options);
+    document.getElementById('clock').textContent = currentTime;
 }
 
 // Update the clock every millisecond
 setInterval(updateClock, 1);
-
