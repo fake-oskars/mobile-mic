@@ -19,9 +19,9 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
             const averageVolume = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
 
             // Map the volume to all three color components (red, green, and blue)
-            const red = Math.floor(255 * (averageVolume / 255));
-            const green = Math.floor(255 * (averageVolume / 255));
-            const blue = Math.floor(255 * (averageVolume / 255));
+            const red = Math.floor(255 * (averageVolume / 10));
+            const green = Math.floor(255 * (averageVolume / 20));
+            const blue = Math.floor(255 * (averageVolume / 30));
 
             // Set the background color based on volume
             document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
