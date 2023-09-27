@@ -19,7 +19,7 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
             const averageVolume = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
 
             // Map the volume to all three color components (red, green, and blue)
-            const factor = 5; // Adjust this factor as needed
+            const factor = 2; // Adjust this factor as needed
             const red = Math.floor(255 * (averageVolume / 255) * factor);
             const green = Math.floor(255 * (averageVolume / 255) * factor);
             const blue = Math.floor(255 * (averageVolume / 255) * factor);
