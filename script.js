@@ -7,13 +7,10 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
     micStream.then((stream) => {
         const source = audioContext.createMediaStreamSource(stream);
         source.connect(analyser);
-        analyser.connect(audioContext.destination);
 
         analyser.fftSize = 256; // Adjust this value for sensitivity
 
         const dataArray = new Uint8Array(analyser.frequencyBinCount);
-
-        const container = document.querySelector('.container');
 
         function updateColor() {
             analyser.getByteFrequencyData(dataArray);
@@ -27,7 +24,7 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
             const blue = 100;
 
             // Set the background color based on volume
-            container.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+            document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
 
             requestAnimationFrame(updateColor);
         }
