@@ -1,6 +1,9 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
+    margin: 0; /* Remove default margin */
+    overflow: hidden; /* Prevent scrollbars */
+    transition: background-color 0.2s ease; /* Smooth color transition */
 }
 
 .container {
@@ -9,6 +12,4 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #fff; /* Default background color */
-    transition: background-color 0.2s ease; /* Smooth color transition */
 }
