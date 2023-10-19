@@ -7,14 +7,19 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <div class="clock-container">
         <div id="clock"></div>
-        <!-- Inside the body tag, after the clock div -->
-        <br>
-        <div id="circle"></div><br>
-        <label for="sensitivity"><br></label>
+    </div>
+
+    <div class="circle-container">
+        <div id="circle"></div>
+    </div>
+
+    <div class="slider-container">
+        <label for="sensitivity">Microphone Sensitivity:</label>
         <input type="range" id="sensitivity" min="1" max="100" value="32" step="1">
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
