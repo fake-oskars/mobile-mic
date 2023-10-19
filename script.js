@@ -1,3 +1,4 @@
+// Check if the browser supports the Web Audio API
 if ('AudioContext' in window || 'webkitAudioContext' in window) {
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const analyser = audioContext.createAnalyser();
@@ -7,20 +8,21 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
         const source = audioContext.createMediaStreamSource(stream);
         source.connect(analyser);
 
-        analyser.fftSize = 2048; // Adjust this value for sensitivity (higher values for better frequency resolution)
+        analyser.fftSize = 128; // Adjust this value for sensitivity
 
-        const dataArray = new Float32Array(analyser.frequencyBinCount);
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
         function updateColor() {
-            analyser.getFloatFrequencyData(dataArray);
+            analyser.getByteFrequencyData(dataArray);
 
             // Calculate the average volume
-            const averageVolume = Math.abs(dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length);
+            const averageVolume = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
 
-            // Map the volume to a gradient from blue to red
-            const blue = Math.floor(255 * (1 - averageVolume));
-            const red = Math.floor(255 * averageVolume);
+            // Map the volume to a color gradient from blue to red
+            const blue = Math.floor(255 * (1 - averageVolume / 255));
+            const red = Math.floor(255 * (averageVolume / 255));
 
+            // Set the background color based on volume
             document.body.style.backgroundColor = `rgb(${red}, 0, ${blue})`;
 
             requestAnimationFrame(updateColor);
