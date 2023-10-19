@@ -8,7 +8,19 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
         const source = audioContext.createMediaStreamSource(stream);
         source.connect(analyser);
 
-        analyser.fftSize = 32; // Adjust this value for sensitivity
+        // Initial value for sensitivity
+        let sensitivity = 32;
+
+        // Get the slider element
+        const sensitivitySlider = document.getElementById('sensitivity');
+
+        // Event listener for slider input
+        sensitivitySlider.addEventListener('input', function () {
+            sensitivity = parseInt(this.value);
+            analyser.fftSize = sensitivity;
+        });
+
+        analyser.fftSize = sensitivity;
 
         const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
@@ -35,7 +47,6 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
 } else {
     console.error('Web Audio API is not supported in this browser.');
 }
-
 
 // Function to update the clock with the correct timezone
 function updateClock() {
