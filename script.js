@@ -10,14 +10,14 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
 
         analyser.fftSize = 2048; // Adjust this value for sensitivity
 
-        const dataArray = new Uint8Array(analyser.frequencyBinCount);
+        const dataArray = new Float32Array(analyser.frequencyBinCount);
 
         function updateColor() {
-            analyser.getByteFrequencyData(dataArray);
+            analyser.getFloatFrequencyData(dataArray);
 
             // Calculate the average volume
             const averageVolume = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
-
+            
             // Map the volume to a color gradient from blue to red
             const blue = Math.floor(255 * (1 - averageVolume / 255));
             const red = Math.floor(255 * (averageVolume / 255));
