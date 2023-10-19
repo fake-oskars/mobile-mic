@@ -3,7 +3,7 @@ body {
     text-align: center;
     margin: 0; /* Remove default margin */
     overflow: hidden; /* Prevent scrollbars */
-    transition: background-color 0.0s ease; /* Smooth color transition */
+  /*  transition: background-color 0.0s ease; /* Smooth color transition */
 }
 
 .container {
