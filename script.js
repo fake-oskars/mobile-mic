@@ -14,6 +14,9 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
         // Get the slider element
         const sensitivitySlider = document.getElementById('sensitivity');
 
+        // Get the circle element
+        const circle = document.getElementById('circle');
+
         // Event listener for slider input
         sensitivitySlider.addEventListener('input', function () {
             sensitivity = parseInt(this.value);
@@ -24,7 +27,7 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
 
         const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
-        function updateColor() {
+        function updateColorAndSize() {
             analyser.getByteFrequencyData(dataArray);
 
             // Calculate the average volume
@@ -37,10 +40,15 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
             // Set the background color based on volume
             document.body.style.backgroundColor = `rgb(${red}, 0, ${blue})`;
 
-            requestAnimationFrame(updateColor);
+            // Set the size of the circle based on sensitivity and volume
+            const circleSize = sensitivity + averageVolume;
+            circle.style.width = `${circleSize}px`;
+            circle.style.height = `${circleSize}px`;
+
+            requestAnimationFrame(updateColorAndSize);
         }
 
-        updateColor();
+        updateColorAndSize();
     }).catch((error) => {
         console.error('Error accessing the microphone:', error);
     });
