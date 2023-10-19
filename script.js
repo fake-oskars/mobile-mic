@@ -17,9 +17,11 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
             // Calculate the average volume
             const averageVolume = Math.abs(dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length);
 
-            // Map the volume to a color gradient from black to red
-            const intensity = Math.floor(255 * averageVolume);
-            document.body.style.backgroundColor = `rgb(${intensity}, 0, 0)`;
+            // Map the volume to a gradient from blue to red
+            const blue = Math.floor(255 * (1 - averageVolume));
+            const red = Math.floor(255 * averageVolume);
+
+            document.body.style.backgroundColor = `rgb(${red}, 0, ${blue})`;
 
             requestAnimationFrame(updateColor);
         }
