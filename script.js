@@ -8,7 +8,7 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
         const source = audioContext.createMediaStreamSource(stream);
         source.connect(analyser);
 
-        analyser.fftSize = 128; // Adjust this value for sensitivity
+        analyser.fftSize = 12; // Adjust this value for sensitivity
 
         const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
