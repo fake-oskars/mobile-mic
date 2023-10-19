@@ -10,7 +10,7 @@ if ('AudioContext' in window || 'webkitAudioContext' in window) {
 
         analyser.fftSize = 2048; // Adjust this value for sensitivity
 
-        const dataArray = new Float32Array(analyser.frequencyBinCount);
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
         function updateColor() {
             analyser.getByteFrequencyData(dataArray);
