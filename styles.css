@@ -5,6 +5,14 @@ body {
     overflow: hidden; /* Prevent scrollbars */
 }
 
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .clock-container,
 .circle-container,
 .slider-container {
